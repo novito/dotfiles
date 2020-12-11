@@ -6,7 +6,23 @@
 - clean: ['~']
 
 - link:
+    # Git
     ~/.gitconfig: gitconfig
+
+    # Nvim
     ~/.config/nvim/init.vim: init.vim
+
+    # Fish 
+    ~/.config/fish/config.fish: fish/config.fish
+    ~/.config/fish/fishfile: fish/fishfile
+    ~/.config/fish/conf.d:
+      path: fish/conf.d/*.fish
+      glob: true
+    ~/.config/fish/functions:
+      path: fish/functions/*.fish
+      glob: true
+    ~/.config/fish/completions:
+      path: fish/completions/*.fish
+      glob: true
 
 
