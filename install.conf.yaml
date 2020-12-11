@@ -7,5 +7,6 @@
 
 - link:
     ~/.gitconfig: gitconfig
+    ~/.config/nvim/init.vim: init.vim
 
 
