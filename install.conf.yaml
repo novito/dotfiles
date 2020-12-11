@@ -1,20 +1,14 @@
+- defaults:
+    link:
+      relink: true # Remove old target if it's a symlink
+      create: true # Create parent directories on link as needed
+
 - clean: ['~']
 
 - link:
-
-
-- clean: ['~']
-
-- link:
-    # Git
-    ~/.gitconfig: gitconfig
-
-    # Nvim
+    # Nvim 
     ~/.config/nvim/init.vim: init.vim
-
-    # Fish 
-    ~/.config/fish/config.fish: fish/config.fish
-    ~/.config/fish/fishfile: fish/fishfile
+    # Fish shell
     ~/.config/fish/conf.d:
       path: fish/conf.d/*.fish
       glob: true
@@ -24,5 +18,3 @@
     ~/.config/fish/completions:
       path: fish/completions/*.fish
       glob: true
-
-

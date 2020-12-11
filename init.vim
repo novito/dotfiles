@@ -16,6 +16,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'morhetz/gruvbox'
 Plug 'Raimondi/delimitMate'
 Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
     
 call plug#end()
 
