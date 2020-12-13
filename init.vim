@@ -17,8 +17,8 @@ Plug 'morhetz/gruvbox'
 Plug 'Raimondi/delimitMate'
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
-Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'HerringtonDarkholme/yats.vim'
     
 call plug#end()
 
