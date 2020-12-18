@@ -9,6 +9,7 @@
     # Nvim 
     ~/.config/nvim/init.vim: init.vim
     # Fish shell
+    ~/.config/fish/config.fish: fish/config.fish
     ~/.config/fish/conf.d:
       path: fish/conf.d/*.fish
       glob: true
