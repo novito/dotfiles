@@ -22,6 +22,9 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rust-lang/rust.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'rking/ag.vim'
     
 call plug#end()
 
@@ -77,6 +80,8 @@ set nobackup
 set nowritebackup
 " color scheme configs
 set background=dark 
+" fzf
+set rtp+=/usr/local/opt/fzf
 colorscheme gruvbox
 " }}}
 
@@ -140,7 +145,7 @@ map <C-n> :NERDTreeToggle<CR>
 " ==================================
 
 " Peronal pref: Use comma for leader key
-let mapleader=","
+let mapleader = "\<Space>"
 
 " Clear out highlights
 nnoremap <leader><space> :noh<cr>
@@ -182,6 +187,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Open current file in Nerdtree
+nmap ,n :NERDTreeFind<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -281,4 +289,39 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" FZF 
+" find files
+nnoremap <silent> <C-p> :GFiles<CR>
+" find content in files
+nnoremap <C-g> :Rg<Cr>
+" Ag set up
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" Do not open file in buffer after finding with Ag
+cabbrev Ag Ag!
+
+" Find stuff just pressing \
+nnoremap \ :Ag<SPACE>
+
+nmap <silent> <leader>cp :let @+ = expand("%")<CR>
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 " }}}
