@@ -4,35 +4,105 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
 endif
-    
+
 call plug#begin()
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
 
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
-" color scheme
-Plug 'morhetz/gruvbox'
-Plug 'Raimondi/delimitMate'
-Plug 'preservim/nerdtree'
+" GLOBALS
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-obsession' " Vim session managment
+Plug 'tpope/vim-fugitive' " Vim git plugin
+Plug 'tpope/vim-abolish' " Better find/replace
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'preservim/nerdcommenter'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'rust-lang/rust.vim'
+Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'rking/ag.vim'
-    
+Plug 'mhinz/vim-startify' " Fancy start screen
+
+" UI HELPERS
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+
+"Plug 'yuezk/vim-js'
+"Plug 'maxmellon/vim-jsx-pretty'
+" color scheme
+"Plug 'Raimondi/delimitMate'
+"Plug 'peitalin/vim-jsx-typescript'
+"Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'rust-lang/rust.vim'
+"Plug 'rking/ag.vim'
+
 call plug#end()
 
 " ==== General ===================== {{{
 " ==================================
 
-filetype plugin indent on
-syntax enable
+"filetype plugin indent on
+"syntax enable
+"set tabstop=2  " 2 space indents by default
+"set shiftwidth=2 " ...
+"set softtabstop=2 " ...
+"set expandtab " ...
+"set undofile " Save a file of all of the undos
+"set undolevels=1000 " Maximum number of changes that can be undone
+"set encoding=utf-8 " Always use UTF8 encodding
+"set autoindent " Auto indent new lines
+"set hidden " Don't unload buffers when leaving them
+"set wildmenu " Enable command-line like completion
+"set wildmode=list:longest " List all matches and complete till longest common string
+"set visualbell " Disable annoying beep
+"set ruler " Show current cursor position
+"set backspace=indent,eol,start " Backspace over everything in insert mode
+"set laststatus=2 " Always show the status line
+"set relativenumber " Use relative line numbers
+"set number " Show current line number
+"set ignorecase " Ignore case when searching
+"set smartcase " Be case sensitive when there are capital letters
+"set gdefault " Globally replace be default
+"set incsearch " Start searching after first letter
+"set showmatch " Show the matching paren when hovering over one
+"set hlsearch " Highlight found search results
+"set splitbelow " Split below be default
+"set splitright " Split to the right by default
+"set winminwidth=5 " Windows can not get smaller than 5 columns
+"set winwidth=110 " Windows are set to 110 columns by default
+"set textwidth=79 " Wrap text around the 79 column
+"set formatoptions=qrn1 " Misc formating options
+"set complete=.,b,u,] " Tab complete correctly
+"set list " Show unprintable characters
+"set listchars=tab:▸\  " Char representing a tab
+"set listchars+=extends:❯ " Char representing an extending line
+"set listchars+=precedes:❮ " Char representing an extending line in the other direction
+"set listchars+=nbsp:␣ " Non breaking space
+"set listchars+=trail:· " Show trailing spaces as dots
+"set showbreak=↪  " Show wraped lines with this char
+"set linebreak " Don't break lines in the middle of words
+"set fillchars+=vert:\  " Don't show pipes in vertical splits
+"set nowrap " Don't wrap lines
+"set synmaxcol=300 " do not highlith very long lines
+"set guitablabel=\[%N\]\ %t\ %M  "show file name and whether it has been modified
+"" configs recommended by coc nvim
+"set nobackup
+"set nowritebackup
+"" color scheme configs
+"set background=dark
+"" fzf
+"set rtp+=/usr/local/opt/fzf
+"colorscheme gruvbox
+" }}}
+"
+set foldmethod=syntax " fold based on syntax
+set foldnestmax=10 " deepest fold is 10 levels
+set nofoldenable " dont fold by default
+set foldlevel=1 " this is just what i use
+set modelines=0 " turn off modelines
 set tabstop=2  " 2 space indents by default
 set shiftwidth=2 " ...
 set softtabstop=2 " ...
@@ -40,7 +110,9 @@ set expandtab " ...
 set undofile " Save a file of all of the undos
 set undolevels=1000 " Maximum number of changes that can be undone
 set encoding=utf-8 " Always use UTF8 encodding
+set scrolloff=3 " Min. lines to keep above or below the cursor when scrolling
 set autoindent " Auto indent new lines
+set noshowmode " Don't show current mode, let airline handle that
 set hidden " Don't unload buffers when leaving them
 set wildmenu " Enable command-line like completion
 set wildmode=list:longest " List all matches and complete till longest common string
@@ -62,7 +134,13 @@ set winminwidth=5 " Windows can not get smaller than 5 columns
 set winwidth=110 " Windows are set to 110 columns by default
 set textwidth=79 " Wrap text around the 79 column
 set formatoptions=qrn1 " Misc formating options
+set colorcolumn=100 " Color the 100th column
+set pastetoggle=<F3> " Go into paste mode with F3
 set complete=.,b,u,] " Tab complete correctly
+set t_Co=256 " Give me all the colors pls
+set nobackup " Don't make backups
+set nowritebackup " Don't make backups " Don't make backups
+set noswapfile " Don't make swap files
 set list " Show unprintable characters
 set listchars=tab:▸\  " Char representing a tab
 set listchars+=extends:❯ " Char representing an extending line
@@ -72,18 +150,54 @@ set listchars+=trail:· " Show trailing spaces as dots
 set showbreak=↪  " Show wraped lines with this char
 set linebreak " Don't break lines in the middle of words
 set fillchars+=vert:\  " Don't show pipes in vertical splits
+set background=dark " I use a dark background
 set nowrap " Don't wrap lines
 set synmaxcol=300 " do not highlith very long lines
-set guitablabel=\[%N\]\ %t\ %M  "show file name and whether it has been modified
-" configs recommended by coc nvim
-set nobackup
-set nowritebackup
-" color scheme configs
-set background=dark 
-" fzf
-set rtp+=/usr/local/opt/fzf
+set ttyfast " Make vim fast?
+set cmdheight=2 " Give more space for displaying messages.
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+set shortmess+=c " Don't pass messages to |ins-completion-menu|.
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
 colorscheme gruvbox
+
+" ==== Auto commands =============== {{{
+" ==================================
+
+fun! StripTrailingWhitespace()
+  " Only strip if the b:noStripeWhitespace variable isn't set
+  if exists('b:noStripWhitespace')
+    return
+  endif
+  %s/\s\+$//e
+endfun
+
+augroup miscGroup
+  autocmd!
+
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  autocmd BufWritePre * call StripTrailingWhitespace()
+
+  autocmd BufNewFile,BufRead Gemfile set filetype=ruby
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  autocmd BufRead,BufNewFile .{babel,eslint,stylelint,jshint}*rc,\.tern-*,*.json set ft=json
+  autocmd BufNewFile,BufRead .tags set ft=tags
+
+  autocmd BufWritePre *.{js,jsx,ts,tsx} :Prettier
+  autocmd BufWritePre *.res,*.resi :RescriptFormat
+augroup END
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " }}}
+"
 
 " ==== Mappings ==================== {{{
 " ==================================
@@ -232,17 +346,6 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -289,7 +392,9 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-" FZF 
+" }}}
+
+" FZF
 " find files
 nnoremap <silent> <C-p> :GFiles<CR>
 " find content in files
@@ -325,3 +430,25 @@ nmap <silent> <leader>cp :let @+ = expand("%")<CR>
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 " }}}
+"
+" Close Quickfix with esc
+augroup vimrcQfClose
+    autocmd!
+    autocmd FileType qf if mapcheck('<esc>', 'n') ==# '' | nnoremap <buffer><silent> <esc> :cclose<bar>lclose<CR> | endif
+augroup END
+
+let g:fzf_buffers_jump = 1
+
+" Tell ack.vim to use ag (the Silver Searcher) instead
+let g:ackprg = 'ag --vimgrep'
+
+" Set where rescript lang server is at
+let g:rescript_type_hint_bin = "~/Code/reason-language-server/bin.exe"
+
+" startify
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+
+let g:NERDTreeWinSize=60
+let g:NERDTreeShowHidden=1
+let g:NERDTreeIgnore = ['^\.tags$', '^\.DS_Store$', '^\.git$']
