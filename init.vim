@@ -5,6 +5,9 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall
 endif
 
+" Open NERDTree by default
+au VimEnter *  NERDTree
+
 call plug#begin()
 
 let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']
@@ -18,8 +21,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
-Plug 'mileszs/ack.vim'
 Plug 'christoomey/vim-tmux-navigator' " Tmux - Vim integration
+Plug 'rking/ag.vim'
 
 " Color scheme
 Plug 'morhetz/gruvbox'
@@ -87,46 +90,46 @@ set cmdheight=2 " Give more space for displaying messages.
 colorscheme gruvbox 
 " }}}
 "
+
+" ==== Leader Mappings ============= {{{
+" ==================================
+let mapleader="\<Space>"
+nmap <leader>n :NERDTreeFind<CR>
+nnoremap <Leader>v :e $MYVIMRC<cr>
+nnoremap <Leader>ve :source $MYVIMRC<cr>
+" }}}
+
 "" ==== Mappings ==================== {{{
 " ==================================
 
 inoremap kj <ESC> 
 nmap <C-n> :NERDTreeToggle<CR>
-nnoremap <c-l> :noh<cr> " Clear out highlights
-:nmap ; : " Remap semicolon to colon
+" Clear out highlights
+nnoremap <C-x> :noh<CR> 
+:nmap ; :
 " Navigate quickfix list with ease
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
-
+" Navigate between buffers
+nnoremap <silent> [q :bnext<CR>
+nnoremap <silent> ]q :bprevious<CR>
+" Ag
+nnoremap \ :Ag<SPACE>
 " }}
-
-" ==== Leader Mappings ============= {{{
-" ==================================
-
-let mapleader="\<Space>"
-nmap <leader>n :NERDTreeFind<CR>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gq :Gcommit -av<cr>
-nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>gcom :Gcommit -v<cr>
-nnoremap <leader>gp :Gpush origin<cr>
-" }}}
 
 " ==== Plugin specific configs ============= {{{
 " ==================================
-"" ack.vim --- {{
 
-" Use ripgrep for searching ⚡️
-" Options include:
-" --vimgrep -> Needed to parse the rg response properly for ack.vim
-" --type-not sql -> Avoid huge sql file dumps as it slows down the search
-" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
-let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+" Look for all the files in CtrlP
+let g:ctrlp_max_files=0
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
-" Auto close the Quickfix list after pressing '<enter>' on a list item
-let g:ack_autoclose = 1
-
-" Maps <leader>/ so we're ready to type the search keyword
-nnoremap <Leader>/ :Ack!<Space>
+" Make NERDTree prettier
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 " }}}
 
+set mouse=a " allow using mouse to resize windows
