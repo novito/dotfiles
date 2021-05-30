@@ -18,11 +18,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive' " git plugin
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plug 'christoomey/vim-tmux-navigator' " Tmux - Vim integration
-Plug 'rking/ag.vim'
 
 " Color scheme
 Plug 'morhetz/gruvbox'
@@ -113,23 +113,23 @@ nnoremap <silent> ]q :cnext<CR>
 " Navigate between buffers
 nnoremap <silent> [q :bnext<CR>
 nnoremap <silent> ]q :bprevious<CR>
-" Ag
-nnoremap \ :Ag<SPACE>
+" CtrlP opens FZF Files
+nmap <C-P> :Files<CR>
+nmap <C-B> :Buffers<CR>
+" Find content in files
+nnoremap \ :Rg<Space>
+
 " }}
 
 " ==== Plugin specific configs ============= {{{
 " ==================================
 
-" Look for all the files in CtrlP
-let g:ctrlp_max_files=0
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
 " Make NERDTree prettier
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+" FZF
+" Disable preview of file
+let g:fzf_preview_window = []
 " }}}
 
 set mouse=a " allow using mouse to resize windows
