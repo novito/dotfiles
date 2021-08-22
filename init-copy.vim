@@ -18,13 +18,15 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive' " git plugin
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'christoomey/vim-tmux-navigator' " Tmux - Vim integration
+Plug 'jesseleite/vim-agriculture'
 
 " Color scheme
-Plug 'gruvbox-community/gruvbox'
+Plug 'morhetz/gruvbox'
 
 " Initialize plugin system
 call plug#end()
@@ -32,29 +34,60 @@ call plug#end()
 
 " ==== General ===================== {{{
 " ==================================
+"
+set foldmethod=syntax " fold based on syntax
+set foldnestmax=10 " deepest fold is 10 levels
+set nofoldenable " dont fold by default
+set foldlevel=1 " this is just what i use
+set modelines=0 " turn off modelines
 set tabstop=2  " 2 space indents by default
 set shiftwidth=2 " ...
 set softtabstop=2 " ...
+set expandtab " ...
 set encoding=utf-8 " Always use UTF8 encodding
 set scrolloff=3 " Min. lines to keep above or below the cursor when scrolling
 set autoindent " Auto indent new lines
 set hidden " Don't unload buffers when leaving them
+set wildmenu " Enable command-line like completion
+set wildmode=list:longest " List all matches and complete till longest common string
 set visualbell " Disable annoying beep
 set ruler " Show current cursor position
+set backspace=indent,eol,start " Backspace over everything in insert mode
+set laststatus=2 " Always show the status line
 set relativenumber " Use relative line numbers
 set number " Show current line number
 set ignorecase " Ignore case when searching
 set smartcase " Be case sensitive when there are capital letters
 set gdefault " Globally replace be default
 set incsearch " Start searching after first letter
+set showmatch " Show the matching paren when hovering over one
 set hlsearch " Highlight found search results
 set splitbelow " Split below be default
 set splitright " Split to the right by default
+set winminwidth=5 " Windows can not get smaller than 5 columns
+set winwidth=110 " Windows are set to 110 columns by default
+set textwidth=79 " Wrap text around the 79 column
+set formatoptions=qrn1 " Misc formating options
+set colorcolumn=100 " Color the 100th column
 set pastetoggle=<F3> " Go into paste mode with F3
+set complete=.,b,u,] " Tab complete correctly
+set t_Co=256 " Give me all the colors pls
 set nobackup " Don't make backups
 set nowritebackup " Don't make backups
 set noswapfile " Don't make swap files
+set list " Show unprintable characters
+set listchars=tab:▸\  " Char representing a tab
+set listchars+=extends:❯ " Char representing an extending line
+set listchars+=precedes:❮ " Char representing an extending line in the other direction
+set listchars+=nbsp:␣ " Non breaking space
+set listchars+=trail:· " Show trailing spaces as dots
+set showbreak=↪  " Show wraped lines with this char
+set linebreak " Don't break lines in the middle of words
+set fillchars+=vert:\  " Don't show pipes in vertical splits
+set background=dark " I use a dark background
 set nowrap " Don't wrap lines
+set synmaxcol=300 " do not highlight very long lines
+set cmdheight=2 " Give more space for displaying messages.
 colorscheme gruvbox 
 " }}}
 "
@@ -65,16 +98,11 @@ let mapleader="\<Space>"
 nmap <leader>n :NERDTreeFind<CR>
 nnoremap <Leader>v :e $MYVIMRC<cr>
 nnoremap <Leader>ve :source $MYVIMRC<cr>
-
-" Telescope finder maps
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 " }}}
 
 "" ==== Mappings ==================== {{{
 " ==================================
+
 inoremap kj <ESC> 
 nmap <C-n> :NERDTreeToggle<CR>
 " Clear out highlights
@@ -86,8 +114,17 @@ nnoremap <silent> ]q :cnext<CR>
 " Navigate between buffers
 nnoremap <silent> [q :bnext<CR>
 nnoremap <silent> ]q :bprevious<CR>
+" CtrlP opens FZF Files
+nmap <C-P> :Files<CR>
+nmap <C-B> :Buffers<CR>
+nnoremap <C-f> :Rg! 
+" Find content in files
+nnoremap \ :Rg<Space>
 " Copy file path 
 nnoremap <leader>cF :let @*=expand("%:p")<CR>
+" Rg file under cursor
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+
 " }}
 
 " ==== Plugin specific configs ============= {{{
@@ -96,4 +133,9 @@ nnoremap <leader>cF :let @*=expand("%:p")<CR>
 " Make NERDTree prettier
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+" FZF
+" Disable preview of file
+let g:fzf_preview_window = []
 " }}}
+
+set mouse=a " allow using mouse to resize windows
