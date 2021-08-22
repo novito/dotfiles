@@ -23,6 +23,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plug 'christoomey/vim-tmux-navigator' " Tmux - Vim integration
+Plug 'jesseleite/vim-agriculture'
 
 " Color scheme
 Plug 'morhetz/gruvbox'
@@ -116,8 +117,13 @@ nnoremap <silent> ]q :bprevious<CR>
 " CtrlP opens FZF Files
 nmap <C-P> :Files<CR>
 nmap <C-B> :Buffers<CR>
+nnoremap <C-f> :Rg! 
 " Find content in files
 nnoremap \ :Rg<Space>
+" Copy file path 
+nnoremap <leader>cF :let @*=expand("%:p")<CR>
+" Rg file under cursor
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " }}
 
