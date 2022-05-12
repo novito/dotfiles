@@ -1,0 +1,10 @@
+# pack-refs with: peeled fully-peeled sorted 
+caa88f6919efb6cdc9774c78dba245f4a2b12032 refs/remotes/origin/dev
+6e27208e76e4878c5f25c110f9bd7d37056c5383 refs/remotes/origin/main
+2c4ea74dfee877103490d4a1282f63c1604ed62a refs/remotes/origin/neovim-0.8
+dad69af980919aab0b3157f6f767ddda438605f6 refs/tags/nvim-0.6
+^fbdeb0f7ee3e351d025ad50aa08950bc8fb5db72
+5e06f9bd75f2cfca2862eeb68fdb9915114def90 refs/tags/v1.0.0
+bfcdfd6dbb738cdb03f4f44a213a971b8d8bcb56 refs/tags/v1.1.0
+f25e3a6bf4b9aa59c8f822e65930401c1fad521f refs/tags/v1.2.0
+^db1b310f9afd28670f61bf2c160165ffa12763f0
