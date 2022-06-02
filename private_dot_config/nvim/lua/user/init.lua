@@ -55,6 +55,12 @@ local config = {
     -- All other entries override the setup() call for default plugins
     treesitter = {
       ensure_installed = { "lua" },
+      indent = {
+        enable = true
+      }
+    },
+    better_escape = {
+      mapping = {"kj"},
     },
     ["nvim-lsp-installer"] = {
       ensure_installed = { "sumneko_lua" },
