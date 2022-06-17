@@ -6,7 +6,7 @@ local keymap = vim.api.nvim_set_keymap
 -- keymap(mode, origin, destination, options)
 
 -- Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts) -- Make sure Space doesn't have any mapping 
+keymap("", "<Space>", "<Nop>", opts) -- Make sure Space doesn't have any mapping
 vim.g.mapleader = " " -- Map loader to space " "
 vim.g.maplocalleader = " " -- Map local leader to space " "
 

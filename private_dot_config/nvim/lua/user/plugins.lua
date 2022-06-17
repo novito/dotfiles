@@ -51,8 +51,13 @@ return packer.startup(function(use)
   use "rafamadriz/friendly-snippets" -- A bunch of snippets to use
 
   -- LSP
-  use "neovim/nvim-lspconfig" -- Enable LSP
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+  use "neovim/nvim-lspconfig" -- Enable LSP client
+  use "williamboman/nvim-lsp-installer" -- LSP servers manager
+
+  -- Treesitter
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use "p00f/nvim-ts-rainbow"
+  use "nvim-treesitter/playground"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
