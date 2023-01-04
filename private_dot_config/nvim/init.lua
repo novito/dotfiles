@@ -1,9 +1,1 @@
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.alpha"
-require "user.nvim-tree"
-require "user.colorscheme"
-require "user.completion"
-require "user.lsp"
-require "user.treesitter"
+require("novito")
