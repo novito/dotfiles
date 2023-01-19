@@ -3,20 +3,18 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 
 -- Better spacing/tabbing
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-
--- I trust vim smartness for indentation
-vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 -- No swapfiles plz
 vim.opt.swapfile = false
 vim.opt.backup = false
 
--- Don't keep terms higlighted
-vim.opt.hlsearch = false
+-- Keep terms higlighted
+vim.opt.hlsearch = true
 -- Higlight as I go modifying my search
 vim.opt.incsearch = true
 
@@ -25,3 +23,4 @@ vim.opt.termguicolors = true
 
 -- Never 8 than less lines when scrolling
 vim.opt.scrolloff = 8
+

@@ -13,13 +13,8 @@ return require('packer').startup(function(use)
         requires = { {'nvim-lua/plenary.nvim'} }
     }
 
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    })
+    -- Colorscheme
+    use { "navarasu/onedark.nvim" }
 
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('theprimeagen/harpoon')
@@ -52,5 +47,12 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons', -- optional, for file icons
         },
         tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    }
+
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
     }
 end)

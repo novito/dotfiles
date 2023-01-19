@@ -19,9 +19,6 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- Toggle NvimTree
-vim.keymap.set("n", "<C-t>", ":NvimTreeToggle<CR>")
-
 -- Better window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
@@ -31,6 +28,12 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 -- Nvim tree
 vim.keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>n", ":NvimTreeFindFile<CR>")
+
+-- Window resizing
+vim.keymap.set("n", "<Up>", ":resize -2<CR>")
+vim.keymap.set("n", "<Down>", ":resize +2<CR>")
+vim.keymap.set("n", "<Left>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<Right>", ":vertical resize +2<CR>")
 
 -- Clear highlight
 vim.keymap.set("n", "<C-p>", ":noh <CR>")
